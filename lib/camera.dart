@@ -45,12 +45,13 @@ class _CameraState extends State<Camera> {
 
             int startTime = new DateTime.now().millisecondsSinceEpoch;
 
-            if (widget.model == "SSD MobileNet" ||widget.model =="Tiny YOLOv2" ) {
+            if (widget.model == "SSD MobileNet" ||widget.model =="Tiny YOLOv2" ){
               Tflite.detectObjectOnFrame(
+
                 bytesList: img.planes.map((plane) {
                   return plane.bytes;
                 }).toList(),
-                model: widget.model == "Tiny YOLOv2" ? "YOLO" : "SSDMobileNet",
+                model: widget.model == "Tiny YOLOv2" ? "Tiny YOLOv2" : "SSDMobileNet",
                 imageHeight: img.height,
                 imageWidth: img.width,
                 imageMean: widget.model == "Tiny YOLOv2" ? 0 : 127.5,

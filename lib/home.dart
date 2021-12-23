@@ -37,14 +37,12 @@ class _HomePageState extends State<HomePage> {
         );
         break;
 
-
-
-      default:
+      case "SSD MobileNet":
         res = await Tflite.loadModel(
             model: "assets/ssd_mobilenet.tflite",
             labels: "assets/ssd_mobilenet.txt");
     }
-    print(res);
+    //print(res);
   }
 
   onSelect(model) {
@@ -66,6 +64,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
+      appBar:AppBar(title: Text('Object Detection'),
+        actions: [
+          if(_model!="")
+          IconButton(onPressed: ()=>onSelect(""), icon: Icon(Icons.arrow_back)),
+        ],
+      ),
       body: _model == ""
           ? Center(
               child: Column(
@@ -95,7 +99,8 @@ class _HomePageState extends State<HomePage> {
                     math.min(_imageHeight, _imageWidth),
                     screen.height,
                     screen.width,
-                    _model),
+                    _model ),
+
               ],
             ),
     );

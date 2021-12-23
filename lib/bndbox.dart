@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 
-class BndBox extends StatelessWidget {
+class BndBox extends StatelessWidget{
   final List<dynamic> results;
   final int previewH;
   final int previewW;
@@ -15,6 +15,7 @@ class BndBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     List<Widget> _renderBoxes() {
       return results.map((re) {
         var _x = re["rect"]["x"];
