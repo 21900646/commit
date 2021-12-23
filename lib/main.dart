@@ -8,7 +8,7 @@ List<CameraDescription> cameras;
 Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
-    cameras = await availableCameras();
+    cameras = await availableCameras(); //카메라를 연다
   } on CameraException catch (e) {
     print('Error: $e.code\nError Message: $e.message');
   }
