@@ -46,8 +46,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   onSelect(model) {
+    print("onselect");
     setState(() {
+      _model = "";
       _model = model;
+      print(_model);
     });
     loadModel();
   }
@@ -64,29 +67,44 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
-      appBar:AppBar(title: Text('Object Detection'),
+      appBar:AppBar(
+        title: Text('Object Detection'),
+        leading:
+        IconButton(onPressed: ()=>onSelect(""), icon: Icon(Icons.arrow_back)),
+
+
         actions: [
-          if(_model!="")
-          IconButton(onPressed: ()=>onSelect(""), icon: Icon(Icons.arrow_back)),
+          TextButton(onPressed:()=>onSelect("SSD MobileNet"), child:Text('SSD')),
+          TextButton(onPressed:()=>onSelect("Tiny YOLOv2"), child:Text('YOLO')),
         ],
       ),
-      body: _model == ""
+      body:
+      _model == ""
           ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RaisedButton(
-                    child: const Text("SSD MobileNet"), //SSD mobilenet
-                    onPressed: () => onSelect("SSD MobileNet"),
-                  ),
-                  RaisedButton(
-                    child: const Text("Tiny YOLOv2"),//yolo
-                    onPressed: () => onSelect("Tiny YOLOv2"),
-                  ),
-                ],
-              ),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children:[Text("원하는 모델을 선택해주세요", style: TextStyle(fontSize: 20, color: Colors.white))]
+        ),
+
+
+
+              // child: Column(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: <Widget>[
+              //     RaisedButton(
+              //       child: const Text("SSD MobileNet"), //SSD mobilenet
+              //       onPressed: () => onSelect("SSD MobileNet"),
+              //     ),
+              //     RaisedButton(
+              //       child: const Text("Tiny YOLOv2"),//yolo
+              //       onPressed: () => onSelect("Tiny YOLOv2"),
+              //     ),
+              //   ],
+              // ),
             )
-          : Stack(
+          :
+      Stack(
               children: [
                 Camera(
                   widget.cameras,
@@ -100,6 +118,7 @@ class _HomePageState extends State<HomePage> {
                     screen.height,
                     screen.width,
                     _model ),
+
 
               ],
             ),
